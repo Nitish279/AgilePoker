@@ -37,10 +37,10 @@ export default function VoteCards({
   };
 
   return (
-    <div className="votes h-1/4 cursor-pointer p-10 gap-4 shadow-xl overflow-x-scroll overflow-y-hidden flex items-center absolute w-full bg-white bottom-0 left-0">
+    <div className="votes h-1/4 cursor-pointer p-10 gap-4 shadow-xl overflow-x-scroll overflow-y-hidden flex items-center justify-center absolute w-full bg-white bottom-0 left-0">
       <Card
         value={
-          <Image width={80} height={80} src={"/images/thumbs-up.svg"} alt="" />
+          <Image width={60} height={60} src={"/images/thumbs-up.svg"} alt="" />
         }
         onClick={handleCardClick("thumbs-up")}
         selected={voted === "thumbs-up"}
@@ -48,8 +48,8 @@ export default function VoteCards({
       <Card
         value={
           <Image
-            width={80}
-            height={80}
+            width={60}
+            height={60}
             src={"/images/thumbs-down.svg"}
             alt=""
           />

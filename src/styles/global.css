@@ -12,14 +12,14 @@
 }
 
 .card {
-  width: 85px;
-  min-width: 85px;
-  height: 120px;
+  width: 80px;
+  min-width: 80px;
+  height: 100px;
   border-radius: 8px;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 50px;
+  font-size: 44px;
   font-weight: 500;
   background: linear-gradient(0deg, #0031FFbb, #55b1f2cc);
   box-shadow: 0 4px 3px #333;
@@ -98,7 +98,7 @@
 /* Spinner animation */
 
 .lds-hourglass {
-  animation: lds-hourglass 1s infinite;
+  animation: lds-hourglass 0.5s infinite;
 }
 
 /* Keyframes */

@@ -7,9 +7,9 @@ import Header from "../common/components/ui/Header";
 import Footer from "../common/components/ui/Footer";
 
 const MyApp = ({ Component, pageProps }) => (
-  <div className="h-screen w-screen flex flex-col overflow-hidden">
+  <div className="flex flex-col min-h-screen">
     <Header />
-    <main className="flex-grow mt-16 mb-16 p-4 overflow-x-auto overflow-y-auto">
+    <main className="flex-grow p-4 overflow-x-auto">
       <Component {...pageProps} />
     </main>
     <Footer />

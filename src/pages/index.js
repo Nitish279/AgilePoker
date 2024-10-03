@@ -26,7 +26,7 @@ export default function App() {
         <link rel="manifest" href="/site.webmanifest" />
         <title>LSEG - Agile Poker</title>
       </Head>
-      <div className="flex items-center justify-center h-screen">
+      <div className="flex items-center justify-center h-[70vh]">
         <Home />
       </div>
     </>
