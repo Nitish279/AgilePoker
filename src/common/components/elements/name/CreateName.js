@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { getName, saveName } from "../../../../utils/username";
 
 export default function CreateName() {
   const handleNameSave = (e) => {
-    if (e.target.value) saveName(e.target.value);
+    if (e.target.value) {
+      saveName(e.target.value);
+    }
   };
 
   return (
@@ -14,8 +16,7 @@ export default function CreateName() {
       <input
         className="relative block px-3 py-2 border-2 border-gray-200 rounded-lg w-full text-lg focus:ring-0"
         id="name"
-        onKeyUp={handleNameSave}
-        onChange={handleNameSave}
+        onBlur={handleNameSave}
         type="text"
         placeholder="story name"
         defaultValue={getName() || ""}

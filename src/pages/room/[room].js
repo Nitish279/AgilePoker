@@ -12,31 +12,41 @@ let socket;
 
 export default function RoomPage() {
   const router = useRouter();
-
   const [roomInfo, setRoomInfo] = useState(null);
 
   useEffect(() => {
     if (!router.isReady) return;
+
     const name = getName();
     const room = router.query.room;
     const type = router.query.type;
 
-    localStorage.openpages = Date.now();
-    var onLocalStorageEvent = function (e) {
-      console.log(e.key);
-      if (e.key == "openpages") {
-        localStorage.page_available = Date.now();
+    if (typeof window !== "undefined") {
+      localStorage.openpages = Date.now();
+      var onLocalStorageEvent = function (e) {
+        if (e.key === "openpages") {
+          localStorage.page_available = Date.now();
+        }
+        if (e.key === "page_available") {
+          window.location.assign("/error");
+        }
+      };
+      window.addEventListener("storage", onLocalStorageEvent, false);
+
+      if (!name) {
+        window.location.assign(`/name?room=${room}`);
+        return;
       }
-      if (e.key == "page_available") {
-        window.location.assign("/error");
+    }
+
+    socketInitializer(name, room, type);
+
+    return () => {
+      if (typeof window !== "undefined") {
+        window.removeEventListener("storage", onLocalStorageEvent);
       }
     };
-    window.addEventListener("storage", onLocalStorageEvent, false);
-    if (!getName()) {
-      window.location.assign(`/name?room=${room}`);
-    }
-    socketInitializer(name, room, type);
-  }, [router.isReady]);
+  }, [router.isReady, router.query.room, router.query.type]);
 
   const socketInitializer = async (name, room, type) => {
     await fetch("/api/socket");
@@ -50,7 +60,6 @@ export default function RoomPage() {
     });
 
     socket.on("user-connected", (value) => {
-      console.log(value);
       toast.info(`User ${value.username} joined room ${value.room}`, {
         autoClose: 3000,
       });

@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Header() {
   return (
@@ -9,9 +10,13 @@ export default function Header() {
     >
       <div className="flex items-center h-full px-4">
         <Link href="/" passHref>
-          <img
+          <Image
             src="/images/lseg-logo.svg"
             alt="LSEG Logo"
+            width={150}
+            height={150}
+            objectFit="contain"
+            layout="responsive"
             style={{
               width: "100%",
               height: "100%",

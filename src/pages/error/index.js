@@ -1,3 +1,6 @@
+import Head from "next/head";
+import Image from "next/image";
+
 export default function Error() {
   return (
     <>
@@ -49,7 +52,7 @@ export default function Error() {
         <h1 className="text-4xl font-bold mb-4">
           Do you think I work at Heroku?
         </h1>
-        <img
+        <Image
           width={300}
           src="https://tenor.com/view/error-something-wrong-fail-gif-20409157"
           alt=""

@@ -2,14 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import useSelectedStore from "../../../store/selected";
 import CreateName from "../name/CreateName";
-
-const getName = () => {
-  // Placeholder function to get name (e.g., from localStorage)
-  return localStorage.getItem("name");
-};
+import { getName } from "../../../../utils/username";
 
 export default function JoinRoom() {
-  const navigate = useRouter();
+  const router = useRouter();
   const [code, setCode] = useState([]);
   const fields = useRef(null);
   const selectDefault = useSelectedStore((state) => state.selectDefault);
@@ -42,13 +38,13 @@ export default function JoinRoom() {
         setCode(newCode);
 
         if (newCode.length === 5) {
-          navigate.push("/room/" + newCode.join(""));
+          router.push("/room/" + newCode.join(""));
         }
       };
 
       inputs.forEach((input) => {
-        input.addEventListener("keydown", handleKeyDown, { passive: true });
-        input.addEventListener("keyup", handleKeyUp, { passive: true });
+        input.addEventListener("keydown", handleKeyDown, { passive: false });
+        input.addEventListener("keyup", handleKeyUp, { passive: false });
       });
 
       return () => {
@@ -58,14 +54,13 @@ export default function JoinRoom() {
         });
       };
     }
-  }, [code, navigate]);
+  }, [code, router]);
 
   return (
     <div>
       <button
         className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-flex items-center absolute top-20 left-20"
-        // onClick={selectDefault}
-        onClick={() => navigate.back()}
+        onClick={() => router.back()}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -80,10 +75,10 @@ export default function JoinRoom() {
             d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5zM10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5z"
           />
         </svg>
-        <span>Back 1</span>
+        <span>Back</span>
       </button>
 
-      {!getName() && <CreateName />}
+      {typeof window !== "undefined" && !getName() && <CreateName />}
 
       <h1 className="text-center text-2xl my-8">Enter the room code:</h1>
       <div>
